@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInSmooth {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+body {
+    font-family: lucida Bright, sans-serif;
+    background-image: url("background2.jpg"); 
+    background-size: cover;      
+    background-position: center; 
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    z-index: 0;
+    animation: fadeInSmooth 0.6s ease-out;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(70, 66, 48, 0.6);
+    z-index: -1;
+}
+
+header {
+    background: #96a855;
+    text-align: center;
+    padding: 20px;
+    animation: fadeDown 0.55s ease-out;
+}
+
+header h1 {
+    color: #354230;
+    margin: 0;
+    font-size: 32px;
+    font-family: "lucida Bright", sans-serif;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    position: static;
+    transform: none;
+}
+
+nav {
+    background: #ffffdd;
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-radius: 22px;
+    box-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+    animation: fadeUp 0.55s ease-out;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 5px;
+}
+
+nav ul li a {
+    color: #3C511B;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 22px;
+    transition: background 0.25s, color 0.25s;
+}
+
+nav ul li a:hover {
+    background: #708238;
+    color: black;
+}
+
+main {
+    background: rgba(70, 96, 53, 0.7);
+    backdrop-filter: blur(8px);
+    color: #FFEDC1;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 60px 20px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.2);
+    text-align: center;
+    flex: 1;
+    animation: fadeInSmooth 0.7s ease-out;
+}
+
+main h2 {
+    color: #FFEDC1;
+    margin-bottom: 25px;
+}
+
+.slider-container {
+    width: 100%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.slider-images {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+}
+
+.slider-images::-webkit-scrollbar {
+    display: none;
+}
+
+.slider-img {
+    width: 90px;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.7s ease;
+    overflow: hidden;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s ease;
+}
+
+.slider-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.slider-images .slider-img:first-child,
+.slider-images .slider-img:last-child { height: 320px; }
+.slider-images .slider-img:nth-child(2),
+.slider-images .slider-img:nth-child(9) { height: 370px; }
+.slider-images .slider-img:nth-child(3),
+.slider-images .slider-img:nth-child(4),
+.slider-images .slider-img:nth-child(5),
+.slider-images .slider-img:nth-child(6),
+.slider-images .slider-img:nth-child(7),
+.slider-images .slider-img:nth-child(8),
+.slider-images .slider-img:nth-child(10) { height: 420px; }
+
+h1 {
+    font-family: "Jost", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: -10%;
+    transform: rotate(270deg);
+    transition: 0.7s ease;
+}
+
+.details {
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
+}
+
+.details h2 {
+    font-family: "Jost", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    transition: 0.7s ease;
+    display: none;
+}
+
+.details p {
+    font-family: "Jost", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    transition: 0.7s ease;
+    display: none;
+}
+
+.slider-img.active {
+    width: 450px !important;
+    height: 500px !important;
+    transform: scale(1.02);
+}
+
+.slider-img.active h1 {
+    display: none;
+}
+
+.slider-img.active .details p,
+.slider-img.active .details h2 {
+    display: block;
+}
+
+footer {
+    background: #96a855;
+    color: #354230;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    border-top: 3px solid #ffffdd;
+    font-size: 0.9em;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+}
+
+footer p { 
+    margin: 0; 
+}
+
+</style>
+</head>
+
+<body>
+<header>
+    <h1>SARAA'S PERSONAL WEBSITE</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutme.html">About Me</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="family.html">Family</a></li>
+        <li><a href="friends.html">Friends</a></li>
+        <li><a href="favourite.html">Favourites</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+</nav>
+
+<main>
+    <h2>✨ My Family ✨</h2>
+    <p>Click on a picture to know more about each family member!</p>
+
+    <!-- Slider Section -->
+    <section class="slider-container">
+        <div class="slider-images">
+            <div class="slider-img">
+                <img src="images/family1.jpg" alt="1" />
+                <h1>My Family</h1>
+                <div class="details">
+                    <h2>My Family</h2>
+                    <p></p>
+                </div>
+            </div>
+            <div class="slider-img">
+                <img src="images/ayah.jpg" alt="2" />
+                <h1>Father</h1>
+                <div class="details">
+                    <h2>Saidi Bin Mohd Salleh</h2>
+                    <p>Engineer</p>
+                </div>
+            </div>
+            <div class="slider-img">
+                <img src="images/mama.jpg" alt="3" />
+                <h1>Mother</h1>
+                <div class="details">
+                    <h2>Asiah Binti Ramli</h2>
+                    <p>Accounting teacher</p>
+                </div>
+            </div>
+            <div class="slider-img active">
+                <img src="images/adah.jpg" alt="4" />
+                <h1>Sister</h1>
+                <div class="details">
+                    <h2>Nur Syuhada Binti Saidi</h2>
+                    <p>Graphic designer</p>
+                </div>
+            </div>
+            <div class="slider-img">
+                <img src="images/shamim.jpg" alt="5" />
+                <h1>Sister</h1>
+                <div class="details">
+                    <h2>Nur Shamim Binti Saidi</h2>
+                    <p>Degree in applied language study</p>
+                </div>
+            </div>
+            <div class="slider-img">
+                <img src="images/safa.jpg" alt="6" />
+                <h1>Sister </h1>
+                <div class="details">
+                    <h2>Nur Safa Dhamirah Binti Saidi</h2>
+                    <p>Auditer & Finance</p>
+                </div>
+            </div>
+            <div class="slider-img">
+                <img src="images/shakeel.jpg" alt="7" />
+                <h1>Brother</h1>
+                <div class="details">
+                    <h2>Muhammad Shakeel Binti Saidi</h2>
+                    <p>Degree in Electrical Engineering</p>
+                </div>
+            </div>
+            <div class="slider-img">
+                <img src="images/cat1.jpg" alt="8" />
+                <h1>cat</h1>
+                <div class="details">
+                    <h2>Yusof</h2>
+                    <p>57 years old</p>
+                </div>
+            </div>
+            <div class="slider-img">
+                <img src="images/zoro.jpg" alt="9" />
+                <h1>cat</h1>
+                <div class="details">
+                    <h2>Zoro</h2>
+                    <p>33 years old</p>
+                </div>
+            </div>
+            <div class="slider-img">
+                <img src="images/bunat.jpg" alt="10" />
+                <h1>cat</h1>
+                <div class="details">
+                    <h2>Bunat</h2>
+                    <p>33 years old</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 This website is for educational purposes only. | Nursaraa Aisha Binti Saidi</p>
+</footer>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+jQuery(document).ready(function ($) {
+    $(".slider-img").on("click", function () {
+        $(".slider-img").removeClass("active");
+        $(this).addClass("active");
+    });
+});
+</script>
+</body>
+</html>
+
+

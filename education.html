@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Education</title>
+
+<style>
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInSmooth {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+body {
+    font-family:"lucida bright",sans-serif;
+    background-image:url("background2.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    position:relative;
+    z-index:0;
+    animation: fadeInSmooth 0.6s ease-out;
+}
+
+body::before {
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(70,66,48,0.6);
+    z-index:-1;
+}
+
+header {
+    background:#96a855;
+    text-align:center;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    animation: fadeDown 0.55s ease-out;
+}
+
+header h1 {
+    color:#354230;
+    margin:0;
+}
+
+nav {
+    background:#ffffdd;
+    width:90%;
+    max-width:900px;
+    margin:20px auto;
+    border-radius:22px;
+    box-shadow:2px 2px 20px rgba(0,0,0,0.3);
+    animation: fadeUp 0.55s ease-out;
+}
+
+nav ul {
+    list-style:none;
+    margin:0;padding:5px 10px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+nav ul li {
+    margin:5px;
+}
+
+nav ul li a {
+    color:#3C511B;
+    text-decoration:none;
+    padding:8px 16px;
+    border-radius:22px;
+    transition:background 0.25s,color 0.25s;
+}
+
+nav ul li a:hover {
+    background:#708238;
+    color:#000;
+}
+
+main {
+    background:rgba(70,96,53,0.7);
+    backdrop-filter:blur(8px);
+    color:#FFEDC1;
+    font-size:0.9em;
+    width:90%;
+    max-width:1300px;
+    margin:40px auto;
+    padding:40px 20px;
+    border-radius:15px;
+    box-shadow:2px 2px 15px rgba(0,0,0,0.2);
+    flex:1;
+    animation: fadeInSmooth 0.7s ease-out;
+}
+
+footer {
+    background:#96a855;
+    color:#354230;
+    text-align:center;
+    padding:15px 0;
+    width:100%;
+    border-top:3px solid #ffffdd;
+    font-size:0.9em;
+    box-shadow:0 -2px 10px rgba(0,0,0,0.3);
+}
+
+/* TIMELINE (horizontal line + dots) */
+.timeline-wrapper {
+    overflow-x:auto;
+    padding:40px 0 60px;
+    position:relative;
+    -webkit-overflow-scrolling:touch;
+}
+
+.timeline-line {
+    position:absolute;
+    top:82%;
+    left:0;
+    right:0;
+    width:1630px;
+    height:6px;
+    background:#ffffdd;
+    border-radius:3px;
+    z-index:0;
+    box-shadow:0 2px 4px rgba(0,0,0,0.1);
+    transform:translateY(-10%);
+}
+
+.timeline { 
+    display:flex;
+    gap:40px;
+    padding:0 30px;
+    position:relative;
+    z-index:1;
+    justify-content:flex-start;
+    min-width:max-content;
+}
+
+/* CARD CONTAINER (flip-card wrapper) */
+.card {
+    flex:0 0 280px;
+    height:340px;               
+    background:transparent;
+    position:relative;
+    margin-bottom:50px;                        
+}
+
+.card::after {
+    content:'';
+    position:absolute;
+    bottom:-40px;
+    left:50%;
+    transform:translateX(-50%);
+    width:18px;height:18px;
+    background:#96a855;
+    border:5px solid #ffffdd;
+    border-radius:50%;
+    z-index:2;
+    box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* FLIP CARD */
+.flip-card {
+    background:transparent;
+    width:100%;
+    height:100%;
+    perspective:1000px;
+}
+
+.flip-card-inner {
+    position:relative;
+    width:100%;
+    height:100%;
+    text-align:center;
+    transition:transform 0.6s;
+    transform-style:preserve-3d;
+}
+
+.card:hover .flip-card-inner {
+    transform:rotateY(180deg);
+}
+
+.flip-card-front,.flip-card-back {
+    position:absolute;
+    width:100%;
+    height:100%;
+    backface-visibility:hidden;
+    border-radius:20px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:20px;
+    box-sizing:border-box;
+    box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+
+.flip-card-front {
+    background:rgba(255,255,221,0.98);
+    color:#354230;
+    z-index:2;
+}
+
+.flip-card-back {
+    background:#708238;
+    color:#FFEDC1;
+    transform:rotateY(180deg);
+    z-index:1;
+}
+
+.flip-card-front img,.flip-card-back img {
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.flip-card-front h3,.flip-card-back h3 {
+    margin:0 0 8px;
+    font-size:1.4em;
+    font-weight:bold;
+}
+
+.flip-card-front h3 {
+    color:#708238;
+}
+
+.flip-card-back h3 {
+    color:#FFEDC1;
+}
+
+.flip-card-front p,.flip-card-back p {
+    margin:0;
+    font-size:0.95em;
+    line-height:1.5;
+}
+
+.flip-card-back p {
+    color:#ffffdd;
+}
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+    .card{flex:0 0 240px;}
+    .timeline{gap:30px;}
+}
+
+@media (max-width:600px){
+    .timeline {
+        flex-direction:column;
+        align-items:center;
+        gap:60px;
+    }
+
+    .timeline-line {
+        display:none;
+    }
+
+    .card::after {
+        top:-25px;
+        bottom:auto;
+    }
+}
+</style>
+</head>
+<body>
+
+<header><h1><b>SARAA'S PERSONAL WEBSITE</b></h1></header>
+
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutme.html">About Me</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="family.html">Family</a></li>
+        <li><a href="friends.html">Friends</a></li>
+        <li><a href="favourite.html">Favourites</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+</nav>
+
+<main>
+    <h2 style="color:#FFEDC1;margin-bottom:30px;text-align:center;font-size:1.8em;">✨ Education ✨</h2>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-line"></div>
+        <div class="timeline">
+
+            <!-- ==================== CARD 1 ==================== -->
+            <div class="card">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="images/sksi.jpg" alt="SKSI Front">
+                            <h3>2012</h3>
+                            <p>Sekolah Kebangsaan Saujana Impian</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="images/sksi1.jpg" alt="SKSI Back">
+                            <h3>2012</h3>
+                            <p>I studied at SKSI from Standard 1 to Standard 3 only.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== CARD 2 ==================== -->
+            <div class="card">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="images/sriiis.jpg" alt="SRIIIS Front">
+                            <h3>2015</h3>
+                            <p>Sekolah Rendah Islam Integrasi Ibnu Sina</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="images/edu1.jpg" alt="SRIIIS Back">
+                            <h3>2015</h3>
+                            <p>I continued my studies from Standard 4 to Standard 6 at SRIIIS, a school that combines religious and academic education.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== CARD 3 ==================== -->
+            <div class="card">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="images/smksi.jpg" alt="SMKSI Front">
+                            <h3>2018</h3>
+                            <p>Sekolah Menengah Kebangsaan Saujana Impian</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="images/edu2.jpg" alt="SMKSI Back">
+                            <h3>2018</h3>
+                            <p>Studied there from Form 1–3 only.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== CARD 4 ==================== -->
+            <div class="card">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="images/smtas.jpg" alt="SMTAS Front">
+                            <h3>2021</h3>
+                            <p>Sekolah Menengah Teknik Alor Setar</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="images/edu6.jpg" alt="SMTAS Back">
+                            <h3>2021</h3>
+                            <p>Took Electrical & Electronic Engineering; favorite subject – Engineering Drawing; hate subject - Add Math.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== CARD 5 ==================== -->
+            <div class="card">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="images/uitm.png" alt="UiTM Front">
+                            <h3>2023</h3>
+                            <p>Universiti Teknologi MARA (UiTM) Cawangan Machang, Kelantan</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="images/edu5.jpg" alt="UiTM Back">
+                            <h3>2023</h3>
+                            <p>Diploma in Information Management, CGPA 3.42.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 This website is for educational purposes only. | Nursaraa Aisha Binti Saidi</p>
+</footer>
+
+</body>
+</html>
